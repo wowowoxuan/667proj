@@ -18,4 +18,6 @@ Functions:
 3. player1play(col), player2play(col), the player put the chess in that col, player1play will modify player_state[:,:,0], player2play will modify player_state[:,:,1]
 4. win_check(player): check if the player is winner.
 5. check_full: check if the chessboard is fully filled.
+6. check_available_actions(): check the available actions for the player
+7. random_remove(): as the professor's requirement, 1/4 chance one piece is removed, this is the implementation of it. remove the bottom one if not 0, and then shif down.
 6. player1(), player2(): integration of all actions the player and the game should take.
