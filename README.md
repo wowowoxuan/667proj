@@ -1,23 +1,29 @@
 # 667proj
 Required package: 
+
 1.python 3.6.8
 
 2.numpy 1.18.4
 
 Download python:
+
 https://www.python.org/downloads/
 
 
 Install numpy:
+
 pip install numpy==1.18.4
 
 Run the code: 
 python play.py to play the game.
 
 The play.py is a script to run the game code. The game code is in game folder.
+
 The connect4.py:
-This is the implentation part of the connect 4 game. 
+This is the implentation part of the connect 4 game.
+
 The player_state is the states of player1 and player2, structure is (H,W,2), 0 means not occupied, 1 means occupied.
+
 Chessboard is combined the player1 and player2's states together, 0 means not occupied, 1 means player1 occupied, 2 means player2 occupied
 
 Functions:
