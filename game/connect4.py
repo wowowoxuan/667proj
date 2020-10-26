@@ -23,7 +23,7 @@ class Connect4:
         if self.chessboard[0,col] != 0:
             return False
         return True
-
+    
     def player1play(self,col):
         row = self._height - 1
         while row >= 0:
@@ -72,6 +72,15 @@ class Connect4:
             return True
         return False
 
+    def check_available_actions(self):
+        available_list = []
+        for i in range(self._width):
+            if self.check_col_available(i):
+                available_list.append(i)
+        print('available actions are:')
+        print(available_list)
+
+
     def random_remove(self):
         random_remove = random.randint(0,3)
         if random_remove == 0:
@@ -91,17 +100,14 @@ class Connect4:
         win1,player1 = self.win_check(1)
         win2,player2 = self.win_check(2)
         if win1 and win2:
-            print('all win because of the auto remove')
             return win1,3
         if win1:
-            print('player' + str(player1) +' win!')
             return win1, player1        
-
         if win2:
-            print('player' + str(player2) +' win!')
             return win2, player2
-        print('player1 state:')
-        print(self.player_state[:,:,0])
+        self.check_available_actions()
+        # print('player1 state:')
+        # print(self.player_state[:,:,0])
         print('chessboard:')
         print(self.chessboard)
         print('please input the col player1 want to put between 0 and' + str(self._width - 1) + ':')
@@ -129,16 +135,14 @@ class Connect4:
         win1,player1 = self.win_check(1)
         win2,player2 = self.win_check(2)
         if win1 and win2:
-            print('all win because of the auto remove')
             return win1,3
         if win1:
-            print('player' + str(player1) +' win!')
             return win1, player1        
         if win2:
-            print('player' + str(player2) +' win!')
             return win2, player2
-        print('player2 state:')
-        print(self.player_state[:,:,1])
+        self.check_available_actions()
+        # print('player2 state:')
+        # print(self.player_state[:,:,1])
         print('chessboard:')
         print(self.chessboard)
         print('please input the col player2 want to put between 0 and' + str(self._width - 1) + ':')
