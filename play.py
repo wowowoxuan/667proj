@@ -1,3 +1,9 @@
+#script for play the game
+#for 667 final proj
+#Author Weiheng Chai
+#email wchai01@syr.edu
+###############################################
+
 from game.connect4 import Connect4
 
 def playconnect4():

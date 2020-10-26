@@ -1,3 +1,9 @@
+#This is the implementaion of connect 4 game
+#for 667 final project
+#author Weiheng Chai
+#email wchai01@syr.edu
+############################################################
+
 import numpy as np
 import random
 
@@ -32,6 +38,7 @@ class Connect4:
                 break
             row -= 1
         self.update_chessboard()
+        print(self.chessboard)
 
     def player2play(self,col):
         row = self._height - 1
@@ -41,6 +48,7 @@ class Connect4:
                 break
             row -= 1
         self.update_chessboard()
+        print(self.chessboard)
     
     def win_check(self, player):
         board = np.zeros((self._height,self._width), dtype = int)
@@ -48,18 +56,22 @@ class Connect4:
             board = self.player_state[:,:,0]
         if player == 2:
             board = self.player_state[:,:,1]
+        #horizontal
         for row in range(self._height):
             for col in range(self._width - 3):
                 if board[row][col] == 1 and board[row][col + 1] == 1 and board[row][col + 2] == 1 and board[row][col + 3] == 1:
                     return True, player
+        #vertical
         for row in range(self._height - 3):
             for col in range(self._width):
                 if board[row][col] == 1 and board[row + 1][col] == 1 and board[row + 2][col] == 1 and board[row + 3][col] == 1:
                     return True, player
+        #-pi/4 diagonal
         for row in range(self._height - 3):
             for col in range(self._width - 3):
                 if board[row][col] == 1 and board[row + 1][col + 1] == 1 and board[row + 2][col + 2] == 1 and board[row + 3][col + 3] == 1:
                     return True, player
+        #+pi/4 diagonal
         for row in range(3,self._height):
             for col in range(self._width - 3):
                 if board[row][col] == 1 and board[row - 1][col + 1] == 1 and board[row - 2][col + 2] == 1 and board[row - 3][col + 3] == 1:
@@ -109,6 +121,7 @@ class Connect4:
         # print('player1 state:')
         # print(self.player_state[:,:,0])
         print('chessboard:')
+        #print(self.player_state)
         print(self.chessboard)
         print('please input the col player1 want to put between 0 and' + str(self._width - 1) + ':')
         player1input = input()
@@ -142,7 +155,7 @@ class Connect4:
             return win2, player2
         self.check_available_actions()
         # print('player2 state:')
-        # print(self.player_state[:,:,1])
+        #print(self.player_state)
         print('chessboard:')
         print(self.chessboard)
         print('please input the col player2 want to put between 0 and' + str(self._width - 1) + ':')
