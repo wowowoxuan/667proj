@@ -2,6 +2,10 @@
 Required package: 
 1.python 3.6.8
 2.numpy 1.18.4
+Download python:
+https://www.python.org/downloads/
+Install numpy:
+pip install numpy==1.18.4
 
 Run the code: 
 python play.py to play the game.
