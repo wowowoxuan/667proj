@@ -106,6 +106,7 @@ class Connect4:
                 self.player_state[:,:,0][0, random_col] = 0
                 self.player_state[:,:,1][0, random_col] = 0
         self.update_chessboard()
+        
     def player1(self):
         print('player1 turn')
         self.random_remove()
