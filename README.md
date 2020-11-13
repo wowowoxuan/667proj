@@ -39,7 +39,9 @@ Functions:
 6. check_available_actions(): check the available actions for the player
 7. random_remove(): as the professor's requirement, 1/4 chance one piece is removed, this is the implementation of it. remove the bottom one if not 0, and then shif down.
 6. player1(), player2(): integration of all actions the player and the game should take.
+
 For Milestone 2:
+
 Learning the Monte Carlo tree search from: https://github.com/Alfo5123/Connect4
 
 Play the game: 
