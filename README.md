@@ -42,7 +42,7 @@ Functions:
 
 For Milestone 2:
 
-Learning the Monte Carlo tree search from: https://github.com/Alfo5123/Connect4
+Learning the Monte Carlo tree search from: https://github.com/Alfo5123/Connect4, and using the structure of their code, but changed a lot, because of the different structure of the game designed and game rule.
 
 Play the game: 
 
