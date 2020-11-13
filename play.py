@@ -33,7 +33,7 @@ def playconnect4():
         if boardfullcheck:
             print('board is full, no one win!')
             break
-        win, player = game.player2()
+        win, player = game.random_player(2)
         if win:
             if player == 3:
                 print('all win')

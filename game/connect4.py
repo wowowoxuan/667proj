@@ -6,6 +6,7 @@
 
 import numpy as np
 import random
+from random import choice
 
 class Connect4:
     def __init__(self, width, height):
@@ -91,6 +92,7 @@ class Connect4:
                 available_list.append(i)
         print('available actions are:')
         print(available_list)
+        return available_list
 
 
     def random_remove(self):
@@ -176,6 +178,33 @@ class Connect4:
         self.player2play(int(player2input))
         win,player = self.win_check(2)
         return win, player
+
+    def random_player(self,i):
+        print('player' + str(i) + ' turn')
+        self.random_remove()
+        win1,player1 = self.win_check(1)
+        win2,player2 = self.win_check(2)
+        if win1 and win2:
+            return win1,3
+        if win1:
+            return win1, player1        
+        if win2:
+            return win2, player2
+        available_action = self.check_available_actions()
+        # print('player2 state:')
+        #print(self.player_state)
+        randomchoice = choice(available_action)
+        print('chessboard:')
+        print(self.chessboard)
+        if i == 1:
+            self.player1play(randomchoice)
+        elif i == 2:
+            self.player2play(randomchoice)
+        win,player = self.win_check(i)
+        return win, player
+
+    def tree_player(self,i):
+        return 'not implent'
 
 
 

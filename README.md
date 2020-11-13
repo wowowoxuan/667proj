@@ -14,8 +14,11 @@ Install numpy:
 
 pip install numpy==1.18.4
 
-Run the code: 
-python play.py to play the game.
+Run the code in the command line: 
+
+python play.py 
+
+to play the game.
 
 The play.py is a script to run the game code. The game code is in game folder.
 
