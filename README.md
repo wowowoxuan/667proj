@@ -42,8 +42,18 @@ Functions:
 
 For Milestone 2:
 
-Learning the Monte Carlo tree search from: https://github.com/Alfo5123/Connect4, and using the structure of their code, but changed a lot, because of the different structure of the game designed and game rule.
+Three AI are added, please look at the game/connect4withai.py file:
+
+1. Random player AI
+
+2. Monte Carlo algorithm AI
+
+3. Monte Carlo tree search based AI
+
+
+
+Learning the Monte Carlo tree search from: https://github.com/Alfo5123/Connect4, and using the structure of their code, but most of the code is written by me(maybe only the name of the function is the same) , because of the different structure of the game designed and game rule.
 
 Play the game: 
 
-python playwithai.py, and following the instruction on the command line to select the AI.
+python playwithai.py, and following the instruction on the command line to select the AI. Did not offer the interface of the Monte Carlo algorithm based AI, because the performance of the MCTs based AI is better.
