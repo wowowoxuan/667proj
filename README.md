@@ -52,7 +52,7 @@ Three AI are added, please look at the game/connect4withai.py file:
 
 
 
-Learning the Monte Carlo tree search from: https://github.com/Alfo5123/Connect4, and using the structure of their code, but most of the code is written by me(maybe only the name of the function is the same) , because of the different structure of the game designed and game rule.
+Learning the implementation of Monte Carlo tree search from: https://github.com/Alfo5123/Connect4, and using the structure of their code, but most of the code is written by me(maybe only the name of the function is the same) , because of the different structure of the game designed and game rule.
 
 Play the game: 
 
