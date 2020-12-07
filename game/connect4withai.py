@@ -11,12 +11,42 @@ import copy
 import math
 import datetime
 
+import torch
 
+
+
+def hwc2chw(state):
+    return np.transpose(state, (2, 0, 1))
+
+def chw2hwc(encode):
+    return np.transpose(encode, (1, 2, 0))
 
 def update_chessboard(player_state):
     a = player_state[:,:,1].copy()
     a[a == 1] = 2
     return a + player_state[:,:,0]
+
+def player12player2(temp_state):
+    transpose1 = np.transpose(temp_state, (2, 0, 1))
+    temp_transpose = transpose1.copy()
+    transpose1[1] = temp_transpose[0] 
+    transpose1[0] = temp_transpose[1]
+    result_state = np.transpose(transpose1, (1, 2, 0))
+    result_board = update_chessboard(result_state)
+    return result_state, result_board
+
+def CNNchoice(net,state,turn):
+    if turn == -1:
+        state,board = player12player2(state)
+    encode = hwc2chw(state)
+    variable_state = Variable(torch.FloatTensor(encode))
+    cuda_state = variable_state.cuda()
+    y = net(cuda_state)
+    m = torch.nn.Softmax(dim=1)
+    probs = m(y.flatten(), dim=0).deatch().cpu().clone().numpy()
+    a = np.random.choice(len(probs), probs)
+    return a
+
 
 def player1play(col, chessboard, player_state):
     row = chessboard.shape[0] - 1
@@ -237,7 +267,9 @@ def UCTserach( maxIter , root , factor ):
     for inter in range(maxIter):
         #print('debug')
         front, turn = treePolicy(root, 1 , factor )
+
         reward,tempcount = defaultPolicy(front.chessboard,front.state, turn)
+
         count += tempcount
         backup(front,reward,turn)
 
@@ -316,6 +348,55 @@ def defaultPolicy(chessboard,state, turn):
         new_state = state
         if len(available_moves) > 0:
             randompick = choice(available_moves)
+            if turn == -1:
+                state,chessboard = player1play(randompick,chessboard,state)
+            elif turn == 1:
+                state,chessboard = player2play(randompick,chessboard,state)
+            win1,_ = win_check(1,chessboard,state)
+            win2,_ = win_check(2,chessboard,state) 
+            if win1 and win2:
+            #print('equal')
+                return 0,count
+            if win1:
+                #print('1win')
+                return -1,count
+            if win2:
+                #print('2win')
+                return 1,count
+            random_remove = random.randint(0,3)
+            if random_remove == 0:
+                random_piece = random.randint(0,chessboard.shape[1]-1)
+                new_player_state,new_chessboard = removepiece(random_piece, chessboard, state)
+                state = new_player_state
+                chessboard = new_chessboard
+            win1,_ = win_check(1,chessboard,state)
+            win2,_ = win_check(2,chessboard,state)   
+            
+        turn *= -1
+        if win1 and win2:
+            #print('equal')
+            return 0,count
+        if win1:
+            #print('1win')
+            return -1,count
+        if win2:
+            #print('2win')
+            return 1,count
+        
+    return  0,count
+
+def CNNPolicy(chessboard,state, turn,net):
+    win1,_ = win_check(1,chessboard,state)
+    win2,_ = win_check(2,chessboard,state)
+    count = 0
+    while check_full(chessboard) == False and not win1 and not win2:
+        count += 1
+        available_moves = tree_check_available_actions(chessboard)
+        new_state = state
+        if len(available_moves) > 0:
+            randompick = CNNchoice(net,size,state,turn)
+            while randompick not in available_moves:
+                randompick = CNNchoice(net,size,state,turn)
             if turn == -1:
                 state,chessboard = player1play(randompick,chessboard,state)
             elif turn == 1:
@@ -590,13 +671,14 @@ class Connect4:
         win1,player1 = self.win_check(1)
         win2,player2 = self.win_check(2)
         if win1 and win2:
-            return win1,3,0
+            return win1,3,0,-1
         if win1:
-            return win1, player1,0       
+            return win1, player1,0,-1       
         if win2:
-            return win2, player2,0
+            return win2, player2,0,-1
+        
         root = Node(self.player_state,self.chessboard)
-        iter = 100
+        iter = 1000
         if self._width > 10 or self._height > 10:
             iter = 1000
         if self._width > 20 or self._height > 20:
@@ -614,7 +696,54 @@ class Connect4:
 
         self.player2play(ans.move)
         win,player = self.win_check(2)
-        return win, player,count
+        return win, player,count,ans.move
+    
+    def MCTS_player2(self,i):
+        print('player' + str(i) + ' turn')
+        self.random_remove()
+        win1,player1 = self.win_check(1)
+        win2,player2 = self.win_check(2)
+        if win1 and win2:
+            return win1,3,0,-1
+        if win1:
+            return win1, player1,0,-1       
+        if win2:
+            return win2, player2,0,-1
+        temp_state = self.player_state.copy()
+        temp_board = self.chessboard.copy()
+
+        if i == 1:
+            transpose1 = np.transpose(temp_state, (2, 0, 1))
+            temp_transpose = transpose1.copy()
+            transpose1[1] = temp_transpose[0] 
+            transpose1[0] = temp_transpose[1]
+            temp_state = np.transpose(transpose1, (1, 2, 0))
+            temp_board = update_chessboard(temp_state)
+
+
+
+        root = Node(temp_state,temp_board)
+        iter = 1000
+        if self._width > 10 or self._height > 10:
+            iter = 1000
+        if self._width > 20 or self._height > 20:
+            iter = 100
+        if self._width > 40 or self._height > 40:
+            iter = 1
+        if self._width > 80 or self._height > 80:
+            print('=================================================================================')
+            print("please select a smaller size board for using the mct ai!!!!!!!!!!!!!!!!!!!!!!!!")
+            print('=================================================================================')
+        #print('debug1')
+        ans,count = UCTserach( iter , root , 2)
+        print('chessboard:')
+        print(self.chessboard)
+        if i == 1:
+            self.player1play(ans.move)
+        if i == 2:
+            self.player2play(ans.move)
+        win,player = self.win_check(2)
+        return win, player,count,ans.move
 
     def monte_carlo_player(self):
         print('player2' + ' turn')
