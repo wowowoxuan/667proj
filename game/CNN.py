@@ -181,5 +181,5 @@ def train():
     #print(test_loss_list)
     #print(test_acc_list)
 #train()
-calscale()
+#calscale()
 
