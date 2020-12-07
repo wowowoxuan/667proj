@@ -13,6 +13,8 @@ Required package:
 
 6.torchvision==0.4.0
 
+7.matplotlib==3.1.1
+
 Download python:
 
 https://www.python.org/downloads/
