@@ -20,9 +20,7 @@ Download python:
 https://www.python.org/downloads/
 
 
-Install numpy:
-
-pip install numpy==1.18.4
+After python is installed, run: pip install -r requirements.txt to download the required packages, the /667proj/requirements.txt is a simplified version of /667proj/environment/requirements.txt, if /667proj/requirements.txt did not works well, please use the /667proj/environment/requirements.txt.
 
 For MileStone 1:
 Run the code in the command line: 
