@@ -5,6 +5,14 @@ Required package:
 
 2.numpy 1.18.4
 
+3.torch==1.2.0
+
+4.torchfile==0.1.0
+
+5.torchsummary==1.5.1
+
+6.torchvision==0.4.0
+
 Download python:
 
 https://www.python.org/downloads/
