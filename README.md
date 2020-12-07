@@ -22,7 +22,7 @@ https://www.python.org/downloads/
 
 After python is installed, run: pip install -r requirements.txt to download the required packages.
 
-The /667proj/requirements.txt is a simplified version of /667proj/environment/requirements.txt, if /667proj/requirements.txt did not works well, please use the /667proj/environment/requirements.txt.
+The /667proj/requirements.txt is a simplified version of /667proj/environment/requirements.txt, I delete the packages which are not used in the project and test on my computer, if /667proj/requirements.txt did not works well, please use the /667proj/environment/requirements.txt.
 
 For MileStone 1:
 Run the code in the command line: 
