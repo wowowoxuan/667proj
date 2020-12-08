@@ -726,10 +726,10 @@ class Connect4:
 
         root = Node(temp_state,temp_board)
         iter = 100
-        if self._width > 10 or self._height > 10:
-            iter = 1000
-        if self._width > 20 or self._height > 20:
+        if self._width > 15 or self._height > 15:
             iter = 100
+        if self._width > 20 or self._height > 20:
+            iter = 50
         if self._width > 40 or self._height > 40:
             iter = 1
         if self._width > 80 or self._height > 80:

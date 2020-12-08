@@ -38,9 +38,9 @@ def playconnect4():
         print('please input board size 7,8,9,10,11 for 7x7,8x8,9x9,10x10,11x11:')
         x = input()
     net = get_cnn_model(int(x))
-    print('please input the first player: 1 for human player, 2 for random player, 3 for MCTS player, 4 for CNNMCTS player')
+    print('please input the first player: 1 for human player, 2 for random player, 3 for MCTS player, 4 for MCTS+NN player')
     player1 = input()
-    print('please input the second player: 1 for human player, 2 for random player, 3 for MCTS player, 4 for CNNMCTS player')
+    print('please input the second player: 1 for human player, 2 for random player, 3 for MCTS player, 4 for MCTS+NN player')
     player2 = input()
     game = Connect4(int(x),int(x),net)
     while True:    
