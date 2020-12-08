@@ -26,7 +26,7 @@ The /667proj/requirements.txt is a simplified version of /667proj/environment/re
 
 If you want to take a look at the code, in the ./game file, the connect4withaimodify.py is the code for playing the game.
 
-The CNN.py is the NN model and CNN model training, testing and implementation.
+The CNN.py is the NN model and CNN model training, testing and implementation, as showed in the function train(), the epoch which has the best test accuracy will save as the model.
 
 The generate_data.py will call some function in connect4withai.py to generate the training data.
 
