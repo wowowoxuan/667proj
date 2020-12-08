@@ -182,7 +182,6 @@ def train():
             #print(testc)
             test_acc_list.append(testc)
             
-    torch.save(model.state_dict(), './pretrained2/7x7.pth')
     #print(train_loss_list)
     #print(test_loss_list)
     #print(test_acc_list)
