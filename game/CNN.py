@@ -116,6 +116,7 @@ def train():
     train_loss_list = []
     test_loss_list = []
     test_acc_list = []
+    bestaccuracy = 0
     #train the model
     model = CNNpolicy(98,7).cuda()
     CEloss = nn.CrossEntropyLoss()
@@ -172,6 +173,11 @@ def train():
             #print(testl)
             test_loss_list.append(testl)
             testc = correct1/total1
+            if testc > bestaccuracy:
+                torch.save(model.state_dict(), './pretrained2/7x7.pth')
+                bestaccuracy = testc
+                print('model saved')
+                print(epoch)
 
             #print(testc)
             test_acc_list.append(testc)
