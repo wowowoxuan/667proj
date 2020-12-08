@@ -12,7 +12,7 @@ import math
 import datetime
 import torch
 import sys
-sys.path.append('/home/wchai01/667proj/game')
+#sys.path.append('./')
 from CNN import CNNpolicy
 from torch.autograd import Variable
 
