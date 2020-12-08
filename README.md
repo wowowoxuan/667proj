@@ -24,46 +24,20 @@ After python is installed, run: pip install -r requirements.txt to download the 
 
 The /667proj/requirements.txt is a simplified version of /667proj/environment/requirements.txt, I delete the packages which are not used in the project and test on my computer, if /667proj/requirements.txt did not works well, please use the /667proj/environment/requirements.txt.
 
-For MileStone 1:
-Run the code in the command line: 
+If you want to take a look at the code, in the ./game file, the connect4withaimodify.py is the code for playing the game.
 
-python play.py 
+The CNN.py is the NN model and CNN model training, testing and implementation.
 
-to play the game.
+The generate_data.py will call some function in connect4withai.py to generate the training data.
 
-The play.py is a script to run the game code. The game code is in game folder.
+drawloss.py and drawscore.py is the code for drawing the figures in the paper.
 
-The connect4.py:
-This is the implentation part of the connect 4 game.
+The pretrained model used in the experiments is stored in the pretrained folder.
 
-The player_state is the states of player1 and player2, structure is (H,W,2), 0 means not occupied, 1 means occupied.
+The generated data is stored in the data folder.
 
-Chessboard is combined the player1 and player2's states together, 0 means not occupied, 1 means player1 occupied, 2 means player2 occupied
+After the environment is set up, run:
 
-Functions:
-1. update_chessboard(): get the up-to-date state of the chessboard.
-2. check_col_available(col): check if one col is full filled, have to do this when the player try to put to this col.
-3. player1play(col), player2play(col), the player put the chess in that col, player1play will modify player_state[:,:,0], player2play will modify player_state[:,:,1]
-4. win_check(player): check if the player is winner.
-5. check_full: check if the chessboard is fully filled.
-6. check_available_actions(): check the available actions for the player
-7. random_remove(): as the professor's requirement, 1/4 chance one piece is removed, this is the implementation of it. remove the bottom one if not 0, and then shif down.
-6. player1(), player2(): integration of all actions the player and the game should take.
+python playwithai.py
 
-For Milestone 2:
-
-Three AI are added, please look at the game/connect4withai.py file:
-
-1. Random player AI
-
-2. Monte Carlo algorithm AI
-
-3. Monte Carlo tree search based AI
-
-
-
-Learning the implementation of Monte Carlo tree search from: https://github.com/Alfo5123/Connect4, and using the structure of their code, but most of the code is written by me(maybe only the name of the function is the same) , because of the different structure of the game designed and game rule.
-
-Play the game: 
-
-python playwithai.py, and following the instruction on the command line to select the AI. Did not offer the interface of the Monte Carlo algorithm based AI, because the performance of the MCTs based AI is better.
+it will show you how to select the player and play the game. In the final project, you can only select 7x7, 8x8, 9x9, 10x10, 11x11 board, because the NN model is trained on these board size.
