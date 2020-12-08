@@ -41,3 +41,5 @@ After the environment is set up, run:
 python playwithai.py
 
 it will show you how to select the player and play the game. In the final project, you can only select 7x7, 8x8, 9x9, 10x10, 11x11 board, because the NN model is trained on these board size.
+
+If the code can not run on your side, please let me know, I can create a zoom meeting and show you how to run the code.
