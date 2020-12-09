@@ -12,32 +12,10 @@ import math
 import datetime
 import torch
 import sys
-#sys.path.append('./')
-from CNN import CNNpolicy
 from torch.autograd import Variable
 
 
-def get_cnn_model(boardsize):
-    if boardsize == 7:
-        net = CNNpolicy(98,7).cuda()
-        net.load_state_dict(torch.load('/home/wchai01/667proj/game/pretrained/7x7.pth'))
-        return net
-    elif boardsize == 8:
-        net = CNNpolicy(128,8).cuda()
-        net.load_state_dict(torch.load('./pretrained/8x8.pth'))
-        return net
-    elif boardsize == 9:
-        net = CNNpolicy(162,9).cuda()
-        net.load_state_dict(torch.load('./pretrained/9x9.pth'))
-        return net
-    elif boardsize == 10:
-        net = CNNpolicy(200,10).cuda()
-        net.load_state_dict(torch.load('./pretrained/10x10.pth'))
-        return net
-    elif boardsize == 11:
-        net = CNNpolicy(242,11).cuda()
-        net.load_state_dict(torch.load('./pretrained/11x11.pth'))
-        return net
+
 
 def hwc2chw(state):
     return np.transpose(state, (2, 0, 1))

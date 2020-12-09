@@ -5,7 +5,34 @@
 ###############################################
 
 from game.connect4withaimodify import *
-from game.CNN import CNNpolicy
+import torch
+import torchvision
+import torch.nn as nn
+import math
+import torch.nn.functional as F
+import numpy as np
+
+
+class CNNpolicy(nn.Module):  
+    def __init__(self,in_channel,out_channel):
+        super(CNNpolicy, self).__init__()
+
+        self.fullyconnectblock = nn.Sequential(
+            nn.Flatten(),
+            nn.Linear(in_channel, 50),
+            nn.BatchNorm1d(50),
+            nn.ReLU(inplace=True),
+            nn.Dropout(p = 0.5),
+            nn.Linear(50, 50),
+            nn.BatchNorm1d(50),
+            nn.ReLU(inplace=True),
+            nn.Dropout(p = 0.5),
+            nn.Linear(50, out_channel)
+
+        )
+    def forward(self, x):
+        x = self.fullyconnectblock(x)
+        return x
 
 def get_cnn_model(boardsize):
     if boardsize == 7:
